@@ -3,8 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-  
+  <div class='container-fluid'>
+    <div class='row'>
+      <div class='col-md-offset-4 col-md-4 jumbotron'>
+        <table class="table table-hover">
+          <thead>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Year</th>
+            <th>Delete</th>
+          </thead>
+          <tbody>
+          <% movies.forEach(function(el){ %>
+          <tr>
+            <td><a href='/movies/<%= el.id %>/edit'> <%= el.id %> </a> </td>
+            <td> <%= el.title %> </td>
+            <td> <%= el.genre %> </td>
+            <td> <%= el.year %> </td>
+            <td><form action="/movies/<%= el.id%>?_method=delete" method="POST"><button type="submit" class="btn btn-warning btn-xs">DELETE</button></form></td>
+          </tr>
+          <% }) %>
+          <tr>
+            <td><form action="/movies/new" method="GET"><button type="submit" class="btn btn-info btn-sm">Add Movie</button></form></td>
+          </tr>
+          </tbody>        
+        </table>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
