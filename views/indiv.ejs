@@ -14,7 +14,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class='container-fluid'>
+<div class='container-fluid'>
     <div class='row'>
       <div class='col-md-offset-4 col-md-4 jumbotron'>
         <table class="table table-hover">
@@ -26,24 +26,21 @@
             <th>Edit</th>
             <th>Delete</th>
           </thead>
-          <tbody>
-          <% movies.forEach(function(el){ %>
+          <tbody>      
           <tr>
-            <td><a href='/movies/<%= el.id %>'> <%= el.id %> </a> </td>
-            <td> <%= el.title %> </td>
-            <td> <%= el.genre %> </td>
-            <td> <%= el.year %> </td>
-            <td><a href='/movies/<%= el.id %>/edit'> Edit </a> </td>
-            <td><form action="/movies/<%= el.id%>?_method=delete" method="POST"><button type="submit" class="btn btn-warning btn-xs">DELETE</button></form></td>
+            <td> <%= movie.id %> </a> </td>
+            <td> <%= movie.title %> </td>
+            <td> <%= movie.genre %> </td>
+            <td> <%= movie.year %> </td>
+            <td><a href='/movies/<%= movie.id %>/edit'> Edit </a> </td>
+            <td><form action="/movies/<%= movie.id%>?_method=delete" method="POST"><button type="submit" class="btn btn-warning btn-xs">DELETE</button></form></td>
           </tr>
-          <% }) %>
-          <tr>
-            <td><form action="/movies/new" method="GET"><button type="submit" class="btn btn-info btn-sm">Add Movie</button></form></td>
-          </tr>
+
           </tbody>        
         </table>
       </div>
     </div>
   </div>
+  
 </body>
 </html>
