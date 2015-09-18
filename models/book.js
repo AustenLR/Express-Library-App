@@ -2,8 +2,10 @@ var mongoose = require("mongoose");
 
 var movieSchema = new mongoose.Schema({
                    title: String,
+                   actors: String,
                    genre: String,
-                   year: Number
+                   year: Number,
+                   plot: String
                   });
 
 

@@ -1,6 +1,7 @@
 var express = require('express'),
   app = express(),
-  bodyParser = require("body-parser");
+  bodyParser = require("body-parser"),
+  request = require('request'),
   methodOverride = require('method-override');
 
 app.set('view engine', 'ejs');
@@ -10,11 +11,25 @@ app.use(methodOverride('_method'));
 
 db = require('./models');
 
-app.get('/moives', function(req,res){
-  res.redirect('/');
+app.get('/', function(req,res){
+  res.render('search');
 });
 
-app.get('/',function(req,res){
+app.get('/searchresults',function (req,res){
+  var title = req.query.title;
+  console.log(title);
+  request.get('http://www.omdbapi.com/?t='+ title, function(error, response, body){
+    var movie = JSON.parse(body);
+    console.log(movie);
+    res.render('results', {movie: movie});
+  });
+});
+
+
+
+//--------------
+
+app.get('/movies',function(req,res){
   db.Movie.find({}, function(err,movies){
     res.render('index', {movies: movies});
   });
@@ -28,7 +43,7 @@ app.get('/movies/new',function(req,res){
 
 app.post('/movies', function(req,res){
   db.Movie.create(req.body, function(){
-    res.redirect('/');
+    res.redirect('/movies');
   });
 });
 
@@ -44,7 +59,7 @@ app.get('/movies/:id/edit',function(req,res){
 
 app.put('/movies/:id',function(req,res){
   db.Movie.findByIdAndUpdate(req.params.id, req.body, function(){
-    res.redirect('/');
+    res.redirect('/movies');
   });
 });
 
@@ -80,7 +95,7 @@ app.get('/movies/:id',function(req,res){
 
 app.delete('/movies/:id',function(req,res){
   db.Movie.findByIdAndRemove(req.params.id, function(){
-    res.redirect('/');
+    res.redirect('/movies');
   });
 });
 

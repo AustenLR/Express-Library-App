@@ -1,0 +1,30 @@
+<% include ./partials/header %>
+
+        <table class="table table-hover">
+          <thead>
+            <th>Title</th>
+            <th>Actors</th>
+            <th>Genre</th>
+            <th>Year</th>
+            <th>Plot</th>
+            <th>Save</th>
+          </thead>
+          <tbody>      
+          <tr>
+            <td> <%= movie.Title %> </td>
+            <td> <%= movie.Actors %></td>
+            <td> <%= movie.Genre %> </td>
+            <td> <%= movie.Year %> </td>
+            <td> <%= movie.Plot %></td>
+            <td><form action="/movies" method="POST"><button type="submit" class="btn btn-success btn-sm">Save</button>
+            <input type='hidden' value='<%= movie.Title %>' name='title'>
+            <input type='hidden' value='<%= movie.Actors %>' name='actors'>
+            <input type='hidden' value='<%= movie.Genre%>' name='genre'>
+            <input type='hidden' value='<%= movie.Year%>' name='year'>
+            <input type='hidden' value='<%= movie.Plot%>' name='plot'>
+            </form></td>
+          </tr>
+          </tbody>        
+        </table>
+
+<% include ./partials/footer %>
